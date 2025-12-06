@@ -1,1399 +1,1249 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>Alex Kagozi – AI Research & Engineering</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio of Alex Kagozi – AI researcher & engineer working on transformers, reinforcement learning, medical imaging, and real-world AI systems." />
-
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Simple Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-1PqupZyGvC8Xqg9p6eP3VYlY8fE+zSx0R3Q8ELu3t7M5MZ4FjMT1sH1g+Jm0RBNQn3WvH5Fck3C1+gqC7k1z6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <style>
-    :root {
-      --bg: #050816;
-      --bg-elevated: #0b1020;
-      --bg-soft: #111827;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.15);
-      --accent-strong: #0ea5e9;
-      --text-main: #e5e7eb;
-      --text-muted: #9ca3af;
-      --border-subtle: rgba(148, 163, 184, 0.3);
-      --radius-lg: 20px;
-      --radius-full: 999px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
-      --transition: 200ms ease;
-    }
-
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #0b1120 0, #020617 50%, #000 100%);
-      color: var(--text-main);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    /* Layout */
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .wrapper {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(2, 6, 23, 0.9), rgba(2, 6, 23, 0.4), transparent);
-      border-bottom: 1px solid rgba(15, 23, 42, 0.8);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.85rem 0;
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 10%, #38bdf8, #4ade80, #6366f1);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      color: #020617;
-      font-size: 0.9rem;
-      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.45);
-    }
-
-    .nav-title {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .nav-title span:first-child {
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .nav-title span:last-child {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      font-size: 0.85rem;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      position: relative;
-      padding-bottom: 0.1rem;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #38bdf8, #4ade80);
-      transition: width var(--transition);
-    }
-
-    .nav-links a:hover {
-      color: var(--text-main);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .theme-toggle {
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 0.25rem 0.7rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-size: 0.75rem;
-      cursor: pointer;
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--text-muted);
-    }
-
-    .theme-toggle i {
-      font-size: 0.8rem;
-    }
-
-    /* Hero */
-    .hero {
-      padding: 3.5rem 0 2.5rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
-      gap: 2.5rem;
-      align-items: center;
-    }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.2rem 0.7rem 0.2rem 0.25rem;
-      border-radius: var(--radius-full);
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      margin-bottom: 1.1rem;
-    }
-
-    .hero-tag-badge {
-      width: 20px;
-      height: 20px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 10%, #22c55e, #0ea5e9);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #020617;
-      font-size: 0.7rem;
-      font-weight: 700;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.4rem, 3.1vw, 3rem);
-      margin: 0 0 0.75rem;
-      letter-spacing: -0.04em;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(120deg, #f9fafb, #e5e7eb);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 1rem;
-      color: var(--text-muted);
-      max-width: 580px;
-      margin-bottom: 1.6rem;
-    }
-
-    .hero-meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-bottom: 1.8rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .hero-meta-pill {
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 0.2rem 0.7rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(15, 23, 42, 0.85);
-    }
-
-    .hero-meta-pill i {
-      font-size: 0.85rem;
-      color: var(--accent);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .btn-primary,
-    .btn-ghost {
-      border-radius: var(--radius-full);
-      padding: 0.55rem 1.15rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      border: 1px solid transparent;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      transition: background var(--transition), transform var(--transition), box-shadow var(--transition), border-color var(--transition), color var(--transition);
-    }
-
-    .btn-primary {
-      background: linear-gradient(120deg, var(--accent), var(--accent-strong));
-      color: #020617;
-      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.45);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 40px rgba(56, 189, 248, 0.6);
-    }
-
-    .btn-ghost {
-      background: rgba(15, 23, 42, 0.85);
-      color: var(--text-muted);
-      border-color: rgba(148, 163, 184, 0.6);
-    }
-
-    .btn-ghost:hover {
-      color: var(--text-main);
-      border-color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .hero-links {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .hero-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.85rem;
-    }
-
-    .hero-links i {
-      font-size: 1rem;
-      color: var(--accent);
-    }
-
-    .hero-card {
-      position: relative;
-      border-radius: 24px;
-      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), rgba(15, 23, 42, 0.95));
-      padding: 1.5rem 1.3rem 1.4rem;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      box-shadow: var(--shadow-soft);
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: -80px;
-      background: radial-gradient(circle at 10% 0, rgba(56, 189, 248, 0.15), transparent 60%),
-                  radial-gradient(circle at 90% 10%, rgba(168, 85, 247, 0.18), transparent 55%);
-      opacity: 0.9;
-    }
-
-    .hero-card-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.1rem;
-    }
-
-    .hero-card-header span {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-    }
-
-    .hero-card-badge {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      padding: 0.2rem 0.6rem;
-      font-size: 0.75rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: rgba(15, 23, 42, 0.8);
-    }
-
-    .hero-card-badge i {
-      font-size: 0.8rem;
-      color: #22c55e;
-    }
-
-    .hero-card-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.7rem;
-      margin-bottom: 1.2rem;
-      font-size: 0.8rem;
-    }
-
-    .metric {
-      border-radius: 16px;
-      padding: 0.5rem 0.7rem;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.45);
-    }
-
-    .metric-label {
-      color: var(--text-muted);
-      font-size: 0.7rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .metric-value {
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .metric-sub {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-
-    .hero-card-list {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      border-top: 1px dashed rgba(148, 163, 184, 0.6);
-      padding-top: 0.8rem;
-    }
-
-    .hero-card-list strong {
-      color: var(--text-main);
-    }
-
-    .hero-card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.6rem;
-    }
-
-    .hero-card-tag {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      padding: 0.15rem 0.55rem;
-      font-size: 0.7rem;
-      background: rgba(15, 23, 42, 0.85);
-    }
-
-    /* Sections */
-    main {
-      padding-bottom: 3rem;
-    }
-
-    section {
-      padding: 2.2rem 0 0;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.2rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .section-title-wrap {
-      display: flex;
-      align-items: baseline;
-      gap: 0.6rem;
-    }
-
-    .section-title {
-      font-size: 1.2rem;
-      letter-spacing: -0.02em;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .section-title::before {
-      content: "";
-      width: 18px;
-      height: 3px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #38bdf8, #4ade80);
-    }
-
-    .section-subtitle {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .pill-row {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-    }
-
-    .pill-row span {
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.85);
-    }
-
-    /* Projects */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    @media (max-width: 800px) {
-      .hero-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .projects-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .nav-links {
-        display: none;
-      }
-    }
-
-    .card {
-      border-radius: var(--radius-lg);
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid var(--border-subtle);
-      padding: 1rem;
-      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.8);
-      position: relative;
-      overflow: hidden;
-      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(56, 189, 248, 0.6);
-      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.95);
-      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.06), rgba(15, 23, 42, 0.96));
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .card-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .card-title span {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-weight: 400;
-    }
-
-    .card-links {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.8rem;
-      color: var(--accent);
-    }
-
-    .card-links a {
-      padding: 0.15rem 0.4rem;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      background: rgba(15, 23, 42, 0.8);
-    }
-
-    .card-links a:hover {
-      border-color: rgba(56, 189, 248, 0.7);
-    }
-
-    .card-body {
-      font-size: 0.83rem;
-      color: var(--text-muted);
-      margin-bottom: 0.6rem;
-    }
-
-    .card-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      gap: 0.4rem;
-      flex-wrap: wrap;
-    }
-
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-    }
-
-    .tag {
-      border-radius: 999px;
-      padding: 0.15rem 0.45rem;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 0.72rem;
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    /* Skills */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    @media (max-width: 900px) {
-      .skills-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 600px) {
-      .skills-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .skills-group-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 0.45rem;
-    }
-
-    .skills-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      font-size: 0.8rem;
-    }
-
-    .skill-chip {
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text-muted);
-    }
-
-    /* Education & Experience */
-    .timeline {
-      border-left: 1px solid rgba(148, 163, 184, 0.5);
-      padding-left: 1rem;
-      margin-left: 0.3rem;
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 1.2rem;
-      padding-left: 0.3rem;
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -1.13rem;
-      top: 0.2rem;
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: linear-gradient(120deg, #38bdf8, #4ade80);
-      box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.12);
-    }
-
-    .timeline-role {
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .timeline-place {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.2rem;
-    }
-
-    .timeline-meta {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-bottom: 0.3rem;
-    }
-
-    .timeline-body {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    /* Publications */
-    .pub-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .pub-item {
-      border-radius: 12px;
-      padding: 0.7rem 0.8rem;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-
-    .pub-title {
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 0.2rem;
-      color: var(--text-main);
-    }
-
-    .pub-authors,
-    .pub-venue {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .pub-badge {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #a5b4fc;
-    }
-
-    /* Footer / Contact */
-    footer {
-      border-top: 1px solid rgba(15, 23, 42, 0.9);
-      padding: 1.5rem 0 2rem;
-      margin-top: 2.5rem;
-    }
-
-    .footer-grid {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
-
-    .footer-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    /* Scrollbar (nice touch on desktop) */
-    ::-webkit-scrollbar {
-      width: 7px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #020617;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #38bdf8, #4ade80);
-      border-radius: 999px;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <title>Alex Kagozi – AI Research & Engineering</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="Portfolio of Alex Kagozi – AI researcher & engineer working on transformers, reinforcement learning, medical imaging, and real-world AI systems." />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Simple Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-1PqupZyGvC8Xqg9p6eP3VYlY8fE+zSx0R3Q8ELu3t7M5MZ4FjMT1sH1g+Jm0RBNQn3WvH5Fck3C1+gqC7k1z6Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        :root {
+            --bg: #050816;
+            --bg-elevated: #0b1020;
+            --bg-soft: #111827;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.15);
+            --accent-strong: #0ea5e9;
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --border-subtle: rgba(148, 163, 184, 0.3);
+            --radius-lg: 20px;
+            --radius-full: 999px;
+            --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
+            --transition: 200ms ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #0b1120 0, #020617 50%, #000 100%);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Layout */
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(18px);
+            background: linear-gradient(to bottom, rgba(2, 6, 23, 0.9), rgba(2, 6, 23, 0.4), transparent);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.8);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 0;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 10%, #38bdf8, #4ade80, #6366f1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #020617;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.45);
+        }
+
+        .nav-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-title span:first-child {
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .nav-title span:last-child {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            font-size: 0.85rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            position: relative;
+            padding-bottom: 0.1rem;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #38bdf8, #4ade80);
+            transition: width var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            padding: 0.25rem 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: rgba(15, 23, 42, 0.7);
+            color: var(--text-muted);
+        }
+
+        .theme-toggle i {
+            font-size: 0.8rem;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 3.5rem 0 2.5rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.2rem 0.7rem 0.2rem 0.25rem;
+            border-radius: var(--radius-full);
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .hero-tag-badge {
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 10%, #22c55e, #0ea5e9);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #020617;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 3.1vw, 3rem);
+            margin: 0 0 0.75rem;
+            letter-spacing: -0.04em;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(120deg, #f9fafb, #e5e7eb);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 580px;
+            margin-bottom: 1.6rem;
+        }
+
+        .hero-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.8rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .hero-meta-pill {
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            padding: 0.2rem 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        .hero-meta-pill i {
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+            border-radius: var(--radius-full);
+            padding: 0.55rem 1.15rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid transparent;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            transition: background var(--transition), transform var(--transition), box-shadow var(--transition), border-color var(--transition), color var(--transition);
+        }
+
+        .btn-primary {
+            background: linear-gradient(120deg, var(--accent), var(--accent-strong));
+            color: #020617;
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.45);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 40px rgba(56, 189, 248, 0.6);
+        }
+
+        .btn-ghost {
+            background: rgba(15, 23, 42, 0.85);
+            color: var(--text-muted);
+            border-color: rgba(148, 163, 184, 0.6);
+        }
+
+        .btn-ghost:hover {
+            color: var(--text-main);
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .hero-links {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .hero-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+        }
+
+        .hero-links i {
+            font-size: 1rem;
+            color: var(--accent);
+        }
+
+        .hero-card {
+            position: relative;
+            border-radius: 24px;
+            background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), rgba(15, 23, 42, 0.95));
+            padding: 1.5rem 1.3rem 1.4rem;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            inset: -80px;
+            background: radial-gradient(circle at 10% 0, rgba(56, 189, 248, 0.15), transparent 60%),
+                radial-gradient(circle at 90% 10%, rgba(168, 85, 247, 0.18), transparent 55%);
+            opacity: 0.9;
+        }
+
+        .hero-card-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.1rem;
+        }
+
+        .hero-card-header span {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+        }
+
+        .hero-card-badge {
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .hero-card-badge i {
+            font-size: 0.8rem;
+            color: #22c55e;
+        }
+
+        .hero-card-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.7rem;
+            margin-bottom: 1.2rem;
+            font-size: 0.8rem;
+        }
+
+        .metric {
+            border-radius: 16px;
+            padding: 0.5rem 0.7rem;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.45);
+        }
+
+        .metric-label {
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .metric-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .hero-card-list {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.6);
+            padding-top: 0.8rem;
+        }
+
+        .hero-card-list strong {
+            color: var(--text-main);
+        }
+
+        .hero-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.6rem;
+        }
+
+        .hero-card-tag {
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            padding: 0.15rem 0.55rem;
+            font-size: 0.7rem;
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        /* Sections */
+        main {
+            padding-bottom: 3rem;
+        }
+
+        section {
+            padding: 2.2rem 0 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.2rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-title-wrap {
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 18px;
+            height: 3px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #38bdf8, #4ade80);
+        }
+
+        .section-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .pill-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+
+        .pill-row span {
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        @media (max-width: 800px) {
+            .hero-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .projects-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        .card {
+            border-radius: var(--radius-lg);
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid var(--border-subtle);
+            padding: 1rem;
+            box-shadow: 0 18px 35px rgba(15, 23, 42, 0.8);
+            position: relative;
+            overflow: hidden;
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(56, 189, 248, 0.6);
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.95);
+            background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.06), rgba(15, 23, 42, 0.96));
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .card-title span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .card-links {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .card-links a {
+            padding: 0.15rem 0.4rem;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .card-links a:hover {
+            border-color: rgba(56, 189, 248, 0.7);
+        }
+
+        .card-body {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+        }
+
+        .tag {
+            border-radius: 999px;
+            padding: 0.15rem 0.45rem;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            font-size: 0.72rem;
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .skills-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .skills-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .skills-group-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.45rem;
+        }
+
+        .skills-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+        }
+
+        .skill-chip {
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text-muted);
+        }
+
+        /* Education & Experience */
+        .timeline {
+            border-left: 1px solid rgba(148, 163, 184, 0.5);
+            padding-left: 1rem;
+            margin-left: 0.3rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.2rem;
+            padding-left: 0.3rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -1.13rem;
+            top: 0.2rem;
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            background: linear-gradient(120deg, #38bdf8, #4ade80);
+            box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.12);
+        }
+
+        .timeline-role {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .timeline-place {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-body {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Publications */
+        .pub-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .pub-item {
+            border-radius: 12px;
+            padding: 0.7rem 0.8rem;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+        }
+
+        .pub-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: var(--text-main);
+        }
+
+        .pub-authors,
+        .pub-venue {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .pub-badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #a5b4fc;
+        }
+
+        /* Footer / Contact */
+        footer {
+            border-top: 1px solid rgba(15, 23, 42, 0.9);
+            padding: 1.5rem 0 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .footer-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Scrollbar (nice touch on desktop) */
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #38bdf8, #4ade80);
+            border-radius: 999px;
+        }
+    </style>
 </head>
-<body>
-<div class="page">
-  <header>
-    <div class="wrapper">
-      <nav class="nav">
-        <div class="nav-left">
-          <div class="avatar">AK</div>
-          <div class="nav-title">
-            <span>Alex Kagozi</span>
-            <span>AI Research & Engineering</span>
-          </div>
-        </div>
-        <div class="nav-links">
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#education">Education</a>
-          <a href="#publications">Publications</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <button class="theme-toggle" id="themeToggle">
-          <i class="fa-regular fa-circle-half-stroke"></i>
-          <span>Glow mode</span>
-        </button>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="wrapper hero-grid">
-        <div>
-          <div class="hero-tag">
+<body>
+    <div class="page">
+        <header>
+            <div class="wrapper">
+                <nav class="nav">
+                    <div class="nav-left">
+                        <div class="avatar">AK</div>
+                        <div class="nav-title">
+                            <span>Alex Kagozi</span>
+                            <span>AI Research & Engineering</span>
+                        </div>
+                    </div>
+                    <div class="nav-links">
+                        <a href="#projects">Projects</a>
+                        <a href="#skills">Skills</a>
+                        <a href="#education">Education</a>
+                        <a href="#publications">Publications</a>
+                        <!-- <a href="#contact">Contact</a> -->
+                    </div>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fa-regular fa-circle-half-stroke"></i>
+                        <span>Glow mode</span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <!-- Hero -->
+            <section class="hero">
+                <div class="wrapper hero-grid">
+                    <div>
+                        <!-- <div class="hero-tag">
             <div class="hero-tag-badge">RL</div>
             <span>Reinforcement learning × real-world systems</span>
-          </div>
-          <h1>
-            Hi, I'm <span>Alex Kagozi</span><br />
-            building <span>intelligent systems</span> from simulation to hardware.
-          </h1>
-          <p class="hero-subtitle">
-            Graduate researcher in Computer Science at the University of South Dakota. I work on reinforcement learning,
-            medical imaging, information retrieval, and edge-deployed AI systems that interact with the physical world.
-          </p>
+          </div> -->
+                        <h1>
+                            Hi, I'm <span>Alex Kagozi</span><br />
+                            building <span>intelligent systems.
+                        </h1>
+                        <p class="hero-subtitle">
+                            Graduate researcher in Computer Science at the University of South Dakota. I work on large
+                            language transformers, reinforcement learning,
+                            medical imaging and edge-deployed AI systems that interact with the physical world.
+                        </p>
 
-          <div class="hero-meta-row">
-            <div class="hero-meta-pill">
-              <i class="fa-solid fa-location-dot"></i>
-              <span>Vermillion, South Dakota, USA</span>
-            </div>
-            <div class="hero-meta-pill">
-              <i class="fa-solid fa-flask"></i>
-              <span>Research: RL · Medical Imaging · IR · RL-IoT</span>
-            </div>
-            <div class="hero-meta-pill">
-              <i class="fa-solid fa-code"></i>
-              <span>Python · PyTorch · NestJS · Postgres · Docker</span>
-            </div>
-          </div>
+                        <div class="hero-meta-row">
+                            <div class="hero-meta-pill">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>Vermillion, South Dakota, USA</span>
+                            </div>
+                            <div class="hero-meta-pill">
+                                <i class="fa-solid fa-flask"></i>
+                                <span>Research: LLMs · RL · IR · IoT</span>
+                            </div>
+                            <div class="hero-meta-pill">
+                                <i class="fa-solid fa-code"></i>
+                                <span>Python · PyTorch · HuggingFace · Kubernetes</span>
+                            </div>
+                        </div>
 
-          <div class="hero-actions">
-            <a href="#projects" class="btn-primary">
-              <i class="fa-solid fa-circle-play"></i>
-              View projects
-            </a>
-            <a href="#publications" class="btn-ghost">
-              <i class="fa-solid fa-book-open"></i>
-              Research & publications
-            </a>
-          </div>
+                        <div class="hero-actions">
+                            <a href="#projects" class="btn-primary">
+                                <i class="fa-solid fa-circle-play"></i>
+                                View projects
+                            </a>
+                            <a href="#publications" class="btn-ghost">
+                                <i class="fa-solid fa-book-open"></i>
+                                Research & publications
+                            </a>
+                        </div>
 
-          <div class="hero-links">
-            <a href="https://github.com/kagozi" target="_blank" rel="noreferrer">
-              <i class="fa-brands fa-github"></i> GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/alex-kagozi" target="_blank" rel="noreferrer">
-              <i class="fa-brands fa-linkedin"></i> LinkedIn
-            </a>
-            <a href="mailto:alex.kagozi@usd.edu">
-              <i class="fa-regular fa-envelope"></i> Email
-            </a>
-            <!-- Add your Google Scholar link if you like -->
-          </div>
-        </div>
+                        <div class="hero-links">
+                            <a href="https://github.com/kagozi" target="_blank" rel="noreferrer">
+                                <i class="fa-brands fa-github"></i> GitHub
+                            </a>
+                            <a href="https://linkedin.com/in/alex-muchiri/" target="_blank" rel="noreferrer">
+                                <i class="fa-brands fa-linkedin"></i> LinkedIn
+                            </a>
+                            <a href="mailto:alexkagozi@gmail.com">
+                                <i class="fa-regular fa-envelope"></i> Email
+                            </a>
+                            <!-- Add your Google Scholar link if you like -->
+                        </div>
+                    </div>
 
-        <aside class="hero-card">
-          <div class="hero-card-inner">
-            <div class="hero-card-header">
-              <span>Current focus</span>
-              <div class="hero-card-badge">
-                <i class="fa-solid fa-signal"></i>
-                <span>Real-world RL loop</span>
-              </div>
-            </div>
+                    <aside class="hero-card">
+                        <div class="hero-card-inner">
+                            <div class="hero-card-header">
+                                <span>Current focus</span>
+                                <div class="hero-card-badge">
+                                    <i class="fa-solid fa-signal"></i>
+                                    <span>LLMs · VLAs · RL</span>
+                                </div>
+                            </div>
 
-            <div class="hero-card-metrics">
-              <div class="metric">
-                <div class="metric-label">Open-source packages</div>
-                <div class="metric-value">mqtt_rl_bridge</div>
-                <div class="metric-sub">RL on real hardware via MQTT</div>
-              </div>
-              <div class="metric">
-                <div class="metric-label">Research tracks</div>
-                <div class="metric-value">4</div>
-                <div class="metric-sub">RL, Med-Imaging, IR, VLA</div>
-              </div>
-              <div class="metric">
-                <div class="metric-label">Stack</div>
-                <div class="metric-value">PyTorch</div>
-                <div class="metric-sub">+ SB3 · FastAPI · NestJS</div>
-              </div>
-            </div>
+                            <div class="hero-card-metrics">
+                                <div class="metric">
+                                    <div class="metric-label">Research pillars</div>
+                                    <div class="metric-value">3</div>
+                                    <div class="metric-sub">LLMs · VLAs · RL</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Core theme</div>
+                                    <div class="metric-value">Reasoning</div>
+                                    <div class="metric-sub">from tokens to actions</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-label">Stack</div>
+                                    <div class="metric-value">PyTorch · vLLM</div>
+                                    <div class="metric-sub">+ SB3 · Ray · FastAPI</div>
+                                </div>
+                            </div>
 
-            <div class="hero-card-list">
-              <strong>Recent projects</strong>
-              <ul style="margin: 0.35rem 0 0.3rem 1.1rem; padding: 0;">
-                <li>Edge-deployed PPO controlling indoor air quality fans</li>
-                <li>RL-augmented brain tumor segmentation on BraTS</li>
-                <li>Hybrid dense–sparse BEIR search engine in PostgreSQL</li>
-                <li>Bidirectional ASL gloss ↔ English translation</li>
-              </ul>
-              <div class="hero-card-tags">
-                <span class="hero-card-tag">Proximal Policy Optimization (PPO)</span>
-                <span class="hero-card-tag">CNN · ViT · Transformers</span>
-                <span class="hero-card-tag">Postgres · HNSW · IR</span>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
+                            <div class="hero-card-list">
+                                <strong>Recent projects</strong>
+                                <ul style="margin: 0.35rem 0 0.3rem 1.1rem; padding: 0;">
+                                    <li>Vision-language-action agents for real-world control loops</li>
+                                    <li>Specialized transformer for bidirectional ASL gloss ↔ English</li>
+                                    <li>RL for environment-aware HVAC control</li>
+                                    <li>Hybrid retrieval + neural reasoning on BEIR-style benchmarks</li>
+                                </ul>
+                                <div class="hero-card-tags">
+                                    <span class="hero-card-tag">Large Language Models (LLMs)</span>
+                                    <span class="hero-card-tag">Vision-Language-Action Agents</span>
+                                    <span class="hero-card-tag">Reinforcement Learning</span>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
 
-    <!-- Projects -->
-    <section id="projects">
-      <div class="wrapper">
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <h2 class="section-title">Projects</h2>
-            <div class="section-subtitle">
-              Selected open-source, research systems, and products.
-            </div>
-          </div>
-          <div class="pill-row">
-            <span>RL & control</span>
-            <span>Medical imaging</span>
-            <span>Search & IR</span>
-            <span>Dev & product</span>
-          </div>
-        </div>
+            <!-- Projects -->
+            <section id="projects">
+                <div class="wrapper">
+                    <div class="section-header">
+                        <div class="section-title-wrap">
+                            <h2 class="section-title">Projects</h2>
+                            <!-- <div class="section-subtitle">
+                                Selected projects I've worked on.
+                            </div> -->
+                        </div>
+                    </div>
 
-        <div class="projects-grid">
-          <!-- mqtt_rl_bridge -->
-          <article class="card">
-            <div class="card-header">
-              <div class="card-title">
-                mqtt_rl_bridge
-                <span> · Python package</span>
-              </div>
-              <div class="card-links">
-                <a href="https://github.com/kagozi/mqtt_rl_bridge" target="_blank" rel="noreferrer">
-                  <i class="fa-brands fa-github"></i> Code
-                </a>
-              </div>
-            </div>
-            <div class="card-body">
-              Tiny library that lets reinforcement learning agents interact with real hardware over MQTT with minimal boilerplate.
-              Works with Stable-Baselines3, RLlib, CleanRL, or custom training loops. Designed for robotics, smart HVAC, and
-              embedded RL experiments.
-            </div>
-            <div class="card-meta">
-              <div class="card-tags">
-                <span class="tag">Python</span>
-                <span class="tag">MQTT</span>
-                <span class="tag">RL</span>
-                <span class="tag">Stable-Baselines3</span>
-                <span class="tag">IoT</span>
-              </div>
-            </div>
-          </article>
+                    <div class="projects-grid">
 
-          <!-- RL-controlled fan / IAQ -->
-          <article class="card">
-            <div class="card-header">
-              <div class="card-title">
-                RL-Controlled Indoor Air Quality Fan
-                <span> · RL-IoT system</span>
-              </div>
-            </div>
-            <div class="card-body">
-              Event-driven PPO agent controlling a DC fan based on AQI, TVOC, and eCO<sub>2</sub> readings. Uses Raspberry Pi,
-              ENS160 sensors, and mqtt_rl_bridge to close the loop between environment, policy, and hardware, optimizing air
-              quality and energy consumption.
-            </div>
-            <div class="card-meta">
-              <div class="card-tags">
-                <span class="tag">PPO</span>
-                <span class="tag">Raspberry Pi</span>
-                <span class="tag">ENS160</span>
-                <span class="tag">Edge AI</span>
-              </div>
-              <span>Simulation + real-world prototype</span>
-            </div>
-          </article>
+                        <!-- ASL bidirectional translator -->
+                        <article class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    Bidirectional ASL Gloss ↔ English Translation
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                Designs a specialized neural architecture for American Sign Language gloss ↔ English
+                                translation, integrating
+                                gloss-aware embeddings, syntactic constraints, and bidirectional training routines for
+                                low-resource, structured language pairs.
+                            </div>
+                            <div class="card-meta">
+                                <div class="card-tags">
+                                    <span class="tag">NLP</span>
+                                    <span class="tag">Transformers</span>
+                                    <span class="tag">Sign language</span>
+                                </div>
+                                <span>Thesis work</span>
+                            </div>
+                        </article>
 
-          <!-- BraTS RL segmentation -->
-          <article class="card">
-            <div class="card-header">
-              <div class="card-title">
-                RL-Augmented Brain Tumor Segmentation
-                <span> · BraTS 2020</span>
-              </div>
-            </div>
-            <div class="card-body">
-              Explores Proximal Policy Optimization as a meta-controller over segmentation policies for brain tumor MRI.
-              Investigates sample-efficient reward designs, curriculum learning, and integration with standard U-Net pipelines.
-            </div>
-            <div class="card-meta">
-              <div class="card-tags">
-                <span class="tag">Medical imaging</span>
-                <span class="tag">PPO</span>
-                <span class="tag">PyTorch</span>
-                <span class="tag">BraTS 2020</span>
-              </div>
-              <span>Research in preparation</span>
-            </div>
-          </article>
+                        <!-- mqtt_rl_bridge -->
+                        <article class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    mqtt_rl_bridge
+                                    <span> · Python package</span>
+                                </div>
+                                <div class="card-links">
+                                    <a href="https://pypi.org/project/mqtt-rl-bridge/" target="_blank" rel="noreferrer">
+                                        <i class="fa-brands fa-github"></i> Package
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                Tiny library that lets reinforcement learning agents interact with real hardware over
+                                MQTT with minimal boilerplate.
+                                Works with Stable-Baselines3, RLlib, CleanRL, or custom training loops. Designed for
+                                robotics, smart HVAC, and
+                                embedded RL experiments.
+                            </div>
+                            <div class="card-meta">
+                                <div class="card-tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag">MQTT</span>
+                                    <span class="tag">RL</span>
+                                    <span class="tag">Stable-Baselines3</span>
+                                    <span class="tag">IoT</span>
+                                </div>
+                            </div>
+                        </article>
 
-          <!-- GI classification -->
-          <article class="card">
-            <div class="card-header">
-              <div class="card-title">
-                GastroVision GI Pathology Classifier
-                <span> · Deep ensemble</span>
-              </div>
-            </div>
-            <div class="card-body">
-              Deep learning framework for multi-class gastrointestinal endoscopy image classification using CNNs and transformers
-              (ResNet, DenseNet, EfficientNet, ViT, Swin). Combines adaptive focal loss with class weighting and AUC-weighted ensembles.
-            </div>
-            <div class="card-meta">
-              <div class="card-tags">
-                <span class="tag">CNN</span>
-                <span class="tag">ViT</span>
-                <span class="tag">Class imbalance</span>
-                <span class="tag">Ensembles</span>
-              </div>
-              <span>Under review / in preparation</span>
-            </div>
-          </article>
+                        <!-- BEIR hybrid search -->
+                        <article class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    Hybrid BEIR Search Engine
+                                    <span> · IR system</span>
+                                </div>
+                                <div class="card-links">
+                                    <!-- Add repo link when public -->
+                                    <a href="https://github.com/kagozi/hybrid-search-engine" target="_blank"
+                                        rel="noreferrer"><i class="fa-brands fa-github"></i> Repo</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                PostgreSQL-backed hybrid dense–sparse retrieval stack for BEIR datasets (SciFact,
+                                TREC-COVID, etc.). Integrates BM25,
+                                bi-encoders, and cross-encoders with learned fusion weights and nDCG@10-driven
+                                evaluation pipelines.
+                            </div>
+                            <div class="card-meta">
+                                <div class="card-tags">
+                                    <span class="tag">Information Retrieval</span>
+                                    <span class="tag">PostgreSQL</span>
+                                    <span class="tag">HNSW</span>
+                                    <span class="tag">BEIR</span>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- ECG classification -->
+                        <article class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    PTB-XL ECG Classification
+                                </div>
+                                <div class="card-links">
+                                    <!-- Add repo link when public -->
+                                    <a href="https://github.com/kagozi/MultiModal-ECG" target="_blank"
+                                        rel="noreferrer"><i class="fa-brands fa-github"></i> Repo</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                Combines 2D scalogram/phasogram representations of ECG signals with CNNs and
+                                transformer-based models. Evaluates BCE vs focal variants and ensembles across domains
+                                to improve arrhythmia detection.
+                            </div>
+                            <div class="card-meta">
+                                <div class="card-tags">
+                                    <span class="tag">ECG</span>
+                                    <span class="tag">Scalograms</span>
+                                    <span class="tag">Phasograms</span>
+                                    <span class="tag">Transformers</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
 
-          <!-- BEIR hybrid search -->
-          <article class="card">
-            <div class="card-header">
-              <div class="card-title">
-                Hybrid BEIR Search Engine
-                <span> · IR system</span>
-              </div>
-              <div class="card-links">
-                <!-- Add repo link when public -->
-                <!-- <a href="#" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> Code</a> -->
-              </div>
-            </div>
-            <div class="card-body">
-              PostgreSQL-backed hybrid dense–sparse retrieval stack for BEIR datasets (SciFact, TREC-COVID, etc.). Integrates BM25,
-              bi-encoders, and cross-encoders with learned fusion weights and nDCG@10-driven evaluation pipelines.
-            </div>
-            <div class="card-meta">
-              <div class="card-tags">
-                <span class="tag">Information Retrieval</span>
-                <span class="tag">PostgreSQL</span>
-                <span class="tag">HNSW</span>
-                <span class="tag">BEIR</span>
-              </div>
-              <span>IEEE-style manuscript in progress</span>
-            </div>
-          </article>
+            <!-- Skills -->
+            <section id="skills">
+                <div class="wrapper">
+                    <div class="section-header">
+                        <div class="section-title-wrap">
+                            <h2 class="section-title">Skills</h2>
+                            <!-- <div class="section-subtitle">
+                                Tools I reach for in research, engineering, and product work.
+                            </div> -->
+                        </div>
+                    </div>
 
-          <!-- ASL bidirectional translator -->
-          <article class="card">
-            <div class="card-header">
-              <div class="card-title">
-                Bidirectional ASL Gloss ↔ English Translation
-                <span> · Specialized T5</span>
-              </div>
-            </div>
-            <div class="card-body">
-              Designs a specialized neural architecture over T5 for American Sign Language gloss ↔ English translation, integrating
-              gloss-aware embeddings, syntactic constraints, and bidirectional training routines for low-resource, structured language pairs.
-            </div>
-            <div class="card-meta">
-              <div class="card-tags">
-                <span class="tag">NLP</span>
-                <span class="tag">Transformers</span>
-                <span class="tag">T5</span>
-                <span class="tag">Sign language</span>
-              </div>
-              <span>Thesis work</span>
-            </div>
-          </article>
+                    <div class="skills-grid">
+                        <div class="card">
+                            <div class="skills-group-title">AI, LLMs& Machine Learning</div>
+                            <div class="skills-chips">
+                                <span class="skill-chip">Transformers · Multimodal reasoning</span>
+                                <span class="skill-chip">Reinforcement Learning (PPO, DQN, SAC)</span>
 
-          <!-- ECG classification -->
-          <article class="card">
-            <div class="card-header">
-              <div class="card-title">
-                PTB-XL ECG Classification
-                <span> · Time-freq + Transformers</span>
-              </div>
-            </div>
-            <div class="card-body">
-              Combines 2D scalogram/phasogram representations of ECG signals with CNNs and transformer-based models. Evaluates BCE vs focal variants and ensembles across domains to improve arrhythmia detection.
-            </div>
-            <div class="card-meta">
-              <div class="card-tags">
-                <span class="tag">ECG</span>
-                <span class="tag">Scalograms</span>
-                <span class="tag">Transformers</span>
-                <span class="tag">AUC · F1</span>
-              </div>
-              <span>ISBI-style pipeline</span>
-            </div>
-          </article>
+                                <span class="skill-chip">Computer vision · Representation learning</span>
+                                <span class="skill-chip">Time-series & signal processing</span>
+                            </div>
+                        </div>
 
-          <!-- ArtPlace Ecommerce -->
-          <article class="card">
-            <div class="card-header">
-              <div class="card-title">
-                ArtPlace Ecommerce Platform
-                <span> · NestJS</span>
-              </div>
-            </div>
-            <div class="card-body">
-              Full-stack ecommerce platform with wallets, vendor payouts, order tracking, and Stripe/Paystack integration. Built on NestJS, TypeORM, and Postgres with modular cart, orders, and payment infrastructure.
-            </div>
-            <div class="card-meta">
-              <div class="card-tags">
-                <span class="tag">NestJS</span>
-                <span class="tag">TypeScript</span>
-                <span class="tag">Stripe</span>
-                <span class="tag">Paystack</span>
-                <span class="tag">Postgres</span>
-              </div>
-              <span>Product-oriented build</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+                        <div class="card">
+                            <div class="skills-group-title">Languages & Frameworks</div>
+                            <div class="skills-chips">
+                                <span class="skill-chip">Python</span>
+                                <span class="skill-chip">PyTorch · Lightning</span>
+                                <span class="skill-chip">vLLM · HuggingFace Transformers</span>
+                                <span class="skill-chip">Ray · RLlib · Stable-Baselines3</span>
+                                <span class="skill-chip">FastAPI · Flask</span>
+                                <span class="skill-chip">TypeScript · Node.js · NestJS</span>
+                            </div>
+                        </div>
 
-    <!-- Skills -->
-    <section id="skills">
-      <div class="wrapper">
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <h2 class="section-title">Skills</h2>
-            <div class="section-subtitle">
-              Tools I reach for in research, engineering, and product work.
+
+                        <div class="card">
+                            <div class="skills-group-title">Systems & Infra</div>
+                            <div class="skills-chips">
+                                <span class="skill-chip">Docker</span>
+                                <span class="skill-chip">Linux</span>
+                                <span class="skill-chip">Postgres + HNSW</span>
+                                <span class="skill-chip">Redis / caching</span>
+                                <span class="skill-chip">SQL · PostgreSQL · HNSW</span>
+                                <span class="skill-chip">Linux · Docker · Kubernetes</span>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="skills-group-title">Hardware & Edge</div>
+                            <div class="skills-chips">
+                                <span class="skill-chip">Raspberry Pi · Arduino</span>
+                                <span class="skill-chip">MQTT</span>
+                                <span class="skill-chip">Motor drivers</span>
+                                <span class="skill-chip">Edge AI deployment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education & Experience -->
+            <section id="education">
+                <div class="wrapper">
+                    <div class="section-header">
+                        <div class="section-title-wrap">
+                            <h2 class="section-title">Education & Experience</h2>
+                            <!-- <div class="section-subtitle">
+                                Academic path and roles that shape my research direction.
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="timeline">
+                            <!-- Current MS -->
+                            <div class="timeline-item">
+                                <div class="timeline-role">M.S. Computer Science</div>
+                                <div class="timeline-place">University of South Dakota — Vermillion, USA</div>
+                                <div class="timeline-meta">Graduate Research Assistant · 2025 – Present</div>
+                                <div class="timeline-body">
+                                    Working under faculty on medical imaging, reinforcement learning for indoor air
+                                    quality control,
+                                    hybrid information retrieval systems, and sign language translation architectures.
+                                    Responsible for end-to-end
+                                    experimentation, evaluation, and publication.
+                                </div>
+                            </div>
+
+                            <!-- (Optional) Undergrad placeholder -->
+                            <div class="timeline-item">
+                                <div class="timeline-role">B.Eng. in Structural Engineering</div>
+                                <div class="timeline-place">Technical University of Kenya — Nairobi, Kenya</div>
+                                <div class="timeline-meta">2016 – 2021</div>
+                                <div class="timeline-body"> Developed strong analytical
+                                    and problem-solving foundational skills applicable to computer science and research.
+                                    Developed a first of its kind concerete mix design software during final year
+                                    thesis.
+                                </div>
+                            </div>
+
+                            <!-- Campus involvement / leadership -->
+                            <div class="timeline-item">
+                                <div class="timeline-role">Campus & Community Involvement</div>
+                                <div class="timeline-place">University of South Dakota</div>
+                                <div class="timeline-meta">Ongoing</div>
+                                <div class="timeline-body">
+                                    Member, Code Club & AI Club at USD.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Publications -->
+            <section id="publications">
+                <div class="wrapper">
+                    <div class="section-header">
+                        <div class="section-title-wrap">
+                            <h2 class="section-title">Publications & Manuscripts</h2>
+                            <!-- <div class="section-subtitle">
+                                Selected manuscripts (published, under review, or in preparation).
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="pub-list">
+                            <div class="pub-item">
+                                <div class="pub-title">
+                                    Energy-Efficient Indoor Air Quality Control via Cloud-Based Reinforcement Learning and Modular IoT Sensors
+                                </div>
+                                <div class="pub-authors">
+                                    <strong>Alex Kagozi</strong>, collaborators
+                                </div>
+                                <div class="pub-venue">
+                                    <span class="pub-badge">Published</span> – PPO agents running on cloud control fan actuation using ENS160 multi-sensor AQI feedback and
+                                    mqtt.
+                                </div>
+                            </div>
+                            <div class="pub-item">
+                                <div class="pub-title">
+                                    Multimodal ECG Classification using Scalogram and Phasogram Representations on
+                                    PTB-XL
+                                </div>
+                                <div class="pub-authors">
+                                    <strong>Alex Kagozi</strong>, collaborators
+                                </div>
+                                <div class="pub-venue">
+                                    <span class="pub-badge">Published</span> – Combines time-frequency representations
+                                    and transformer-based architectures for robust arrhythmia classification.
+                                </div>
+                            </div>
+                            <div class="pub-item">
+                                <div class="pub-title">
+                                    Hybrid Dense–Sparse Retrieval with BEIR Datasets in PostgreSQL
+                                </div>
+                                <div class="pub-authors">
+                                    <strong>Alex Kagozi</strong>, collaborators
+                                </div>
+                                <div class="pub-venue">
+                                    <span class="pub-badge">In preparation</span> – Documents BM25 + dense retrieval +
+                                    cross-encoder fusion strategies with nDCG@10-driven regression for dataset-specific
+                                    weighting.
+                                </div>
+                            </div>
+                            <div class="pub-item">
+                                <div class="pub-title">
+                                    Specialized Neural Architecture for Bidirectional American Sign Language Gloss
+                                    Translation
+                                </div>
+                                <div class="pub-authors">
+                                    <strong>Alex Kagozi</strong>, et al.
+                                </div>
+                                <div class="pub-venue">
+                                    <span class="pub-badge">Thesis</span> – Master's thesis exploring gloss-aware
+                                    architectures and bidirectional training for ASL ↔ English.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="wrapper footer-grid">
+                <div>© <span id="year"></span> Alex Kagozi. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="#top"><i class="fa-solid fa-arrow-up"></i> Back to top</a>
+                </div>
             </div>
-          </div>
-        </div>
-
-        <div class="skills-grid">
-          <div class="card">
-            <div class="skills-group-title">AI & Machine Learning</div>
-            <div class="skills-chips">
-              <span class="skill-chip">Reinforcement Learning (PPO, DQN, SAC)</span>
-              <span class="skill-chip">Deep Learning · CNNs · Transformers</span>
-              <span class="skill-chip">Computer Vision · Segmentation</span>
-              <span class="skill-chip">NLP · Sequence-to-Sequence</span>
-              <span class="skill-chip">Time-series & signal processing</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="skills-group-title">Languages & Frameworks</div>
-            <div class="skills-chips">
-              <span class="skill-chip">Python</span>
-              <span class="skill-chip">PyTorch</span>
-              <span class="skill-chip">TensorFlow / Keras</span>
-              <span class="skill-chip">FastAPI</span>
-              <span class="skill-chip">NestJS · TypeScript</span>
-              <span class="skill-chip">SQL · PostgreSQL</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="skills-group-title">Systems & Infra</div>
-            <div class="skills-chips">
-              <span class="skill-chip">Docker</span>
-              <span class="skill-chip">Linux</span>
-              <span class="skill-chip">Postgres + HNSW</span>
-              <span class="skill-chip">Redis / caching</span>
-              <span class="skill-chip">CI/CD basics</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="skills-group-title">Hardware & Edge</div>
-            <div class="skills-chips">
-              <span class="skill-chip">Raspberry Pi</span>
-              <span class="skill-chip">MQTT</span>
-              <span class="skill-chip">Sensor integration (ENS160, etc.)</span>
-              <span class="skill-chip">Motor drivers (L298N, BTS7960)</span>
-              <span class="skill-chip">Edge AI deployment</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="skills-group-title">Research & Writing</div>
-            <div class="skills-chips">
-              <span class="skill-chip">Experiment design & ablations</span>
-              <span class="skill-chip">Metric-driven evaluation</span>
-              <span class="skill-chip">LaTeX (IEEE, AAAI, ISBI)</span>
-              <span class="skill-chip">Scientific writing & visualization</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="skills-group-title">Product & Collaboration</div>
-            <div class="skills-chips">
-              <span class="skill-chip">API design</span>
-              <span class="skill-chip">Technical leadership</span>
-              <span class="skill-chip">Open-source maintenance</span>
-              <span class="skill-chip">Mentoring & documentation</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Education & Experience -->
-    <section id="education">
-      <div class="wrapper">
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <h2 class="section-title">Education & Experience</h2>
-            <div class="section-subtitle">
-              Academic path and roles that shape my research direction.
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="timeline">
-            <!-- Current MS -->
-            <div class="timeline-item">
-              <div class="timeline-role">M.S. Computer Science</div>
-              <div class="timeline-place">University of South Dakota — Vermillion, USA</div>
-              <div class="timeline-meta">Graduate Research Assistant · 2023 – Present</div>
-              <div class="timeline-body">
-                Working under faculty on reinforcement learning for medical imaging, edge-based RL control for indoor air quality,
-                hybrid information retrieval systems, and sign language translation architectures. Responsible for end-to-end
-                experimentation, evaluation, and publication-ready pipelines.
-              </div>
-            </div>
-
-            <!-- (Optional) Undergrad placeholder -->
-            <div class="timeline-item">
-              <div class="timeline-role">B.S. in Computer Science (or related)</div>
-              <div class="timeline-place">[Your Institution] — [Location]</div>
-              <div class="timeline-meta">2016 – 2020 (example)</div>
-              <div class="timeline-body">
-                Foundation in algorithms, data structures, operating systems, and software engineering. Deepened interest in AI,
-                optimization, and systems design. (Update this section with your actual details.)
-              </div>
-            </div>
-
-            <!-- Campus involvement / leadership -->
-            <div class="timeline-item">
-              <div class="timeline-role">Campus & Community Involvement</div>
-              <div class="timeline-place">University of South Dakota & Laikipia County, Kenya</div>
-              <div class="timeline-meta">Ongoing</div>
-              <div class="timeline-body">
-                Member, Code Club & AI Club at USD. Co-founder of Empowerment Trust (Aug 2020–Dec 2024), organizing donation
-                drives and logistics to provide school essentials to under-resourced children in Laikipia County, coordinating
-                partners, and leading volunteer teams focused on educational access and inclusion.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Publications -->
-    <section id="publications">
-      <div class="wrapper">
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <h2 class="section-title">Publications & Manuscripts</h2>
-            <div class="section-subtitle">
-              Selected manuscripts (published, under review, or in preparation).
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="pub-list">
-            <div class="pub-item">
-              <div class="pub-title">
-                Specialized Neural Architecture for Bidirectional American Sign Language Gloss Translation
-              </div>
-              <div class="pub-authors">
-                <strong>Alex Kagozi</strong>, collaborators
-              </div>
-              <div class="pub-venue">
-                <span class="pub-badge">Thesis</span> – Master's thesis exploring gloss-aware T5 architectures and bidirectional training for ASL ↔ English.
-              </div>
-            </div>
-
-            <div class="pub-item">
-              <div class="pub-title">
-                Proximal Policy Optimization-based Deep Reinforcement Learning for Brain Tumor Segmentation
-              </div>
-              <div class="pub-authors">
-                <strong>Alex Kagozi</strong>, collaborators
-              </div>
-              <div class="pub-venue">
-                <span class="pub-badge">In preparation</span> – RL-augmented segmentation pipeline on BraTS 2020, comparing PPO-controlled strategies with conventional supervised baselines.
-              </div>
-            </div>
-
-            <div class="pub-item">
-              <div class="pub-title">
-                Edge-based Reinforcement Learning for Indoor Air Quality Optimization Using Modular Sensor Systems
-              </div>
-              <div class="pub-authors">
-                <strong>Alex Kagozi</strong>, collaborators
-              </div>
-              <div class="pub-venue">
-                <span class="pub-badge">In preparation</span> – PPO agents running on or near edge devices to control fan actuation using ENS160 multi-sensor AQI feedback and mqtt_rl_bridge.
-              </div>
-            </div>
-
-            <div class="pub-item">
-              <div class="pub-title">
-                Hybrid Dense–Sparse Retrieval with BEIR Datasets in PostgreSQL
-              </div>
-              <div class="pub-authors">
-                <strong>Alex Kagozi</strong>, collaborators
-              </div>
-              <div class="pub-venue">
-                <span class="pub-badge">In preparation</span> – Documents BM25 + dense retrieval + cross-encoder fusion strategies with nDCG@10-driven regression for dataset-specific weighting.
-              </div>
-            </div>
-
-            <div class="pub-item">
-              <div class="pub-title">
-                Deep Ensembles for Multi-class Gastrointestinal Pathology Classification
-              </div>
-              <div class="pub-authors">
-                <strong>Alex Kagozi</strong>, collaborators
-              </div>
-              <div class="pub-venue">
-                <span class="pub-badge">In preparation</span> – CNN and transformer ensembles with adaptive focal loss and class-aware augmentation for GI endoscopy image classification.
-              </div>
-            </div>
-
-            <div class="pub-item">
-              <div class="pub-title">
-                Transformer-augmented ECG Classification using Scalogram and Phasogram Representations on PTB-XL
-              </div>
-              <div class="pub-authors">
-                <strong>Alex Kagozi</strong>, collaborators
-              </div>
-              <div class="pub-venue">
-                <span class="pub-badge">Planned / WIP</span> – Combines time-frequency representations and transformer-based architectures for robust arrhythmia classification.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <div class="wrapper">
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <h2 class="section-title">Contact</h2>
-            <div class="section-subtitle">
-              Open to research collaborations, internships, and impactful AI projects.
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0;">
-            If you’d like to collaborate on RL for real-world systems, medical imaging, information retrieval, or related areas,
-            feel free to reach out. I’m especially interested in projects that connect strong theory with deployed systems.
-          </p>
-          <p style="font-size: 0.9rem; margin-bottom: 0.8rem;">
-            <strong>Email:</strong> <a href="mailto:alex.kagozi@usd.edu">alex.kagozi@usd.edu</a>
-          </p>
-          <div class="footer-links">
-            <a href="https://github.com/kagozi" target="_blank" rel="noreferrer">
-              <i class="fa-brands fa-github"></i> GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/alex-kagozi" target="_blank" rel="noreferrer">
-              <i class="fa-brands fa-linkedin"></i> LinkedIn
-            </a>
-            <!-- Add a CV PDF link here if you host it in the repo -->
-            <!-- <a href="./Alex_Kagozi_CV.pdf" target="_blank" rel="noreferrer"><i class="fa-regular fa-file-lines"></i> CV</a> -->
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrapper footer-grid">
-      <div>© <span id="year"></span> Alex Kagozi. All rights reserved.</div>
-      <div class="footer-links">
-        <a href="#top"><i class="fa-solid fa-arrow-up"></i> Back to top</a>
-      </div>
+        </footer>
     </div>
-  </footer>
-</div>
 
-<script>
-  // Year
-  document.getElementById("year").textContent = new Date().getFullYear();
+    <script>
+        // Year
+        document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Simple theme toggle that adds a subtle accent change (you can expand if you like)
-  const toggle = document.getElementById("themeToggle");
-  let glowMode = true;
-  toggle.addEventListener("click", () => {
-    glowMode = !glowMode;
-    document.body.style.background =
-      glowMode
-        ? "radial-gradient(circle at top, #0b1120 0, #020617 50%, #000 100%)"
-        : "radial-gradient(circle at top, #020617 0, #020617 50%, #020617 100%)";
-    toggle.querySelector("span").textContent = glowMode ? "Glow mode" : "Calm mode";
-  });
-</script>
+        // Simple theme toggle that adds a subtle accent change (you can expand if you like)
+        const toggle = document.getElementById("themeToggle");
+        let glowMode = true;
+        toggle.addEventListener("click", () => {
+            glowMode = !glowMode;
+            document.body.style.background =
+                glowMode
+                    ? "radial-gradient(circle at top, #0b1120 0, #020617 50%, #000 100%)"
+                    : "radial-gradient(circle at top, #020617 0, #020617 50%, #020617 100%)";
+            toggle.querySelector("span").textContent = glowMode ? "Glow mode" : "Calm mode";
+        });
+    </script>
 </body>
+
 </html>
